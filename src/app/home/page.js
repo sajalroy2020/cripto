@@ -1,7 +1,9 @@
 "use client";
 import Image from 'next/image'
+import { useCallback, useEffect, useState } from 'react';
 
-export default function HomeMain(props) {
+function HomeMain(props) {
+
 	return (
 		<>
 			<div className=''>
@@ -28,6 +30,7 @@ export default function HomeMain(props) {
 	);
 }
 
+export default HomeMain;
 
 
 

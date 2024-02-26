@@ -35,8 +35,8 @@ export default function Footer() {
                         </Link>
                     </div>
                     <div>
-                        <Link href={'/'}>
-                            <PiWalletBold className={pathname == "/markets" ? "active text-3xl" : "text-gray-400 text-3xl"} />
+                        <Link href={'/assets'}>
+                            <PiWalletBold className={pathname == "/assets" ? "active text-3xl" : "text-gray-400 text-3xl"} />
                         </Link>
                     </div>
                 </div>
