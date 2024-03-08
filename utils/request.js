@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const service = axios.create({
-    // baseURL: "https://admin.brotexbd.com/api",
+
     baseURL: "http://localhost:8000/api/",
 
     headers: {
@@ -17,5 +17,6 @@ service.interceptors.request.use((config) => {
     };
     return config;
 });
+
 
 export default service;

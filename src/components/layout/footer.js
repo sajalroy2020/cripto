@@ -4,8 +4,8 @@ import { RiExchangeLine } from "react-icons/ri";
 import { RiExchangeFundsFill } from "react-icons/ri";
 import { LuFileVolume2 } from "react-icons/lu";
 import { PiWalletBold } from "react-icons/pi";
-import Link from 'next/link'
 import { usePathname} from 'next/navigation';
+import Link from 'next/link'
 
 export default function Footer() {
     const pathname = usePathname();
