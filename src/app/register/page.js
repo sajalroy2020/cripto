@@ -7,7 +7,8 @@ import Cookies from "js-cookie";
 import { useDispatch, useSelector } from 'react-redux';
 import { authenticatedFalse, authenticatedTrue, setUser } from '../../../features/AuthSlice';
 import { useRouter } from 'next/navigation';
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Register() {
 
@@ -34,6 +35,7 @@ export default function Register() {
             Cookies.set("token", data.token);
             console.log(data);
             dispatch(authenticatedTrue(), setUser(data.user));
+            showMessage('Registration Successfully');
             router.push('/mail-verify');
 		} catch (error) {
             // error message set 
@@ -50,6 +52,12 @@ export default function Register() {
             }
 		}
 	};
+
+    function showMessage(toastMsg) {
+        toast.success(toastMsg, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+    }
 
 	return (
 		<>
