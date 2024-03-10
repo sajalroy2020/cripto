@@ -4,32 +4,39 @@ import { setMail } from '../../../servises/action/all';
 import Cookies from "js-cookie";
 import { useDispatch, useSelector } from 'react-redux';
 import { redirect } from 'next/navigation';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function MailVerify() {
 
     const token = Cookies.get("token");
-    const authenticated = useSelector((state) => state.auth.authenticated);
-    const authenticatedCheck = useSelector((state) => state.auth);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const fromData = {
             email: event.target.email.value,
         };
-        setMailData(fromData);
+        setMailData(fromData.email);
     }
 
     const setMailData = async (fromData) => {
 		try {
 			const { data } = await setMail(fromData);
+            showMessage('Please check your gmail & verify...!');
 		} catch (error) {
             console.log(error);            
 		}
 	};
 
+    function showMessage(toastMsg) {
+        toast.success(toastMsg, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+    }
+
 	return (
 		<>
-            { token ?  
+            { !token ? redirect('/login') :
 			<div className="container mx-auto my-4">
                 <div className="flex justify-center items-center lg:h-screen px-6">
                     <div className="w-full xl:w-3/4 lg:w-11/12 flex">
@@ -68,7 +75,6 @@ export default function MailVerify() {
                     </div>
                 </div>
             </div>
-          :  redirect('/login')
           }
 		</>
 	);

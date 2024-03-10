@@ -14,10 +14,10 @@ export const getLogin = (data) => {
 };
 
 export const setMail = (data) => {
-    return request.post("/mail-verify", data);
+    return request.get(`/mail-verify/${data}`);
 };
 
 export const getProfileByToken = (data) => {
-    return request.post("/single-user", data);
+    return request.get("/single-user", data);
 };
 

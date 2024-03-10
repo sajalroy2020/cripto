@@ -7,13 +7,16 @@ import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
 import { authenticatedTrue, authenticatedFalse, setUser } from '../../../features/AuthSlice';
 import { getProfileByToken } from '../../../servises/action/all';
-import { redirect } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Header(){
 
   const dispatch = useDispatch();
   const authenticated = useSelector((state) => state.auth.authenticated);
   const user = useSelector((state) => state.auth.user);
+  const router = useRouter();
 
   const checkAuthState = () => {
       try {
@@ -42,7 +45,8 @@ export default function Header(){
   const userLogOut = () => {
     Cookies.remove("token");
     dispatch(authenticatedFalse());
-    redirect('/');
+    showMessage('Log Out Successfully');
+    router.push('/');
   }
 
   useEffect(() => {
@@ -52,7 +56,11 @@ export default function Header(){
     // };
     }, []);
 
-
+    function showMessage(toastMsg) {
+        toast.success(toastMsg, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+    }
 
     return (
         <>

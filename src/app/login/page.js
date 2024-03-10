@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authenticatedFalse, authenticatedTrue, setUser } from '../../../features/AuthSlice';
 import { getLogin } from '../../../servises/action/all';
 import { useRouter } from 'next/navigation';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Login() {
 
@@ -30,10 +32,10 @@ export default function Login() {
     const setLoginData = async (fromData) => {
 		try {
 			const { data } = await getLogin(fromData);
-            console.log(data, 'data');
             Cookies.set("token", data.token);
             dispatch(authenticatedTrue(), setUser(data.user));
-            router.push('/mail-verify');
+            showMessage('Login Successfully');
+            router.push('/');
 		} catch (error) {
             // error message set 
             console.log(error);
@@ -49,6 +51,13 @@ export default function Login() {
             }
 		}
 	};
+
+
+    function showMessage(toastMsg) {
+        toast.success(toastMsg, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+    }
 
 	return (
 		<>

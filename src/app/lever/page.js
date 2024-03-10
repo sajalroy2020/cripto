@@ -2,6 +2,8 @@
 import { createChart, ColorType } from 'lightweight-charts';
 import React, { useEffect, useRef, useState } from 'react';
 import { getChart } from '../../../servises/action/all';
+import Cookies from "js-cookie";
+import { useRouter } from 'next/navigation';
 
 export const ChartComponent = props => {
 
@@ -80,6 +82,9 @@ export const ChartComponent = props => {
 export default function Lever(props) {
 
 	const [chartData, setChartData] = useState([]);
+    const emailVerified = Cookies.get("email_verified");
+    const status = Cookies.get("status");
+    const router = useRouter();
 
 	const getchartData = async () => {
 		try {
@@ -94,33 +99,36 @@ export default function Lever(props) {
 		getchartData();
 	}, []);
 
-	return (              
-		<div className='mx-auto px-0 container mt-4'>
-			<div className='border-4 border-gray-300'>
-			<ChartComponent {...props} data={chartData}></ChartComponent>
+	return (  
+		<> 
+		{emailVerified == 1 && status == 1 ?
+			<div className='mx-auto px-0 container mt-4'>
+				<div className='border-4 border-gray-300'>
+				<ChartComponent {...props} data={chartData}></ChartComponent>
+				</div>
+
+				<div className='w-full px-10 py-16'>
+					<div className="flex gap-4">
+						<button className="bg-transparent hover:bg-green-500 text-green-700 font-semibold hover:text-white py-2 w-full border border-green-500 hover:border-transparent rounded">
+						Buy
+						</button>
+
+						<button className="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 w-full border border-red-500 hover:border-transparent rounded">
+						Sell
+						</button>
+					</div>
+
+					<div className="mt-10">
+						<label for="success" className="block mb-2 text-sm font-medium text-green-700 dark:text-green-500">Price</label>
+						<input type="number" id="success" className="bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm rounded focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-900 dark:border-green-500" placeholder="00.0" />
+					</div>
+					<button className="bg-transparent bg-green-500 mt-12 font-semibold hover:text-white text-green-500 py-3 w-full border border-green-500 hover:bg-green-700 rounded">
+						Buy-BTC
+					</button>
+				</div>
 			</div>
-
-			<div className='w-full px-10 py-16'>
-                <div className="flex gap-4">
-                    <button className="bg-transparent hover:bg-green-500 text-green-700 font-semibold hover:text-white py-2 w-full border border-green-500 hover:border-transparent rounded">
-                    Buy
-                    </button>
-
-                    <button className="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 w-full border border-red-500 hover:border-transparent rounded">
-                    Sell
-                    </button>
-                </div>
-
-                <div className="mt-10">
-                    <label for="success" className="block mb-2 text-sm font-medium text-green-700 dark:text-green-500">Price</label>
-                    <input type="number" id="success" className="bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm rounded focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-900 dark:border-green-500" placeholder="00.0" />
-                </div>
-				<button className="bg-transparent bg-green-500 mt-12 font-semibold hover:text-white text-green-500 py-3 w-full border border-green-500 hover:bg-green-700 rounded">
-                    Buy-BTC
-            	</button>
-            </div>
-			
-		</div>
+		: router.push('/mail-verify')}
+		</>
 	);
 }
 
