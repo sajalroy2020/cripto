@@ -18,6 +18,14 @@ export const setMail = (data) => {
 };
 
 export const getProfileByToken = (data) => {
-    return request.get("/single-user", data);
+    return request.get(`/single-user/${data}`);
+};
+
+export const sentOtp = (data) => {
+    return request.post("/otp-verify", data);
+};
+
+export const deleteOtp = (data) => {
+    return request.get(`/otp-delete/${data}`);
 };
 

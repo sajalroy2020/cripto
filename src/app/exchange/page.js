@@ -1,8 +1,39 @@
 "use client";
+import React, { useEffect, useState } from 'react';
+import { getProfileByToken } from '../../../servises/action/all';
+import { useSelector } from 'react-redux';
+import Cookies from "js-cookie";
+import { useRouter } from 'next/navigation';
 
 export default function Exchange() {
+
+	const authenticated = useSelector((state) => state.auth.authenticated);
+    const tokensiduser = Cookies.get("tokensiduser");
+    const router = useRouter();
+
+
+    const getOtp = async (tokensiduser) => {
+		try {
+			const { data } = await getProfileByToken(tokensiduser);
+			if (data.email_verified == false) {
+				router.push('/mail-verify');
+			}
+		} catch (error) {
+			console.error(error, 'errorerrorerrorerror');
+		}
+	};
+
+    useEffect(() => {                          
+		if (tokensiduser) {
+			getOtp(tokensiduser);
+		}else{
+			router.push('/login')
+		}
+	}, []);
+	
 	return (
 		<>
+        {authenticated ?
             <div className='w-full px-10'>
                 <div className="flex gap-4">
                     <button className="bg-transparent hover:bg-green-500 text-green-700 font-semibold hover:text-white py-2 w-full border border-green-500 hover:border-transparent rounded">
@@ -22,6 +53,7 @@ export default function Exchange() {
                     Buy-BTC
             	</button>
             </div>
+		:router.push('/login')}
 		</>
 	);
 }

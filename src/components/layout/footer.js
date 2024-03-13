@@ -10,10 +10,7 @@ import Cookies from "js-cookie";
 
 export default function Footer() {
     const pathname = usePathname();
-    const emailVerified = Cookies.get("email_verified");
-    const status = Cookies.get("status");
     const token = Cookies.get("token");
-
 
     return (
         <div className="sticky bottom-0 z-30 bg-black border-t border-gray-900">
@@ -30,37 +27,19 @@ export default function Footer() {
                         </Link>
                     </div>
                     <div>
-                        {token ? 
-                        <Link href={emailVerified == 1 && status == 1 ? '/exchange' : '/mail-verify'}>
+                        <Link href={token ? '/exchange' : '/login'}>
                             <RiExchangeLine className={pathname == "/exchange" ? "active text-3xl" : "text-gray-400 text-3xl"} />
                         </Link>
-                        : 
-                        <Link href={'/login'}>
-                            <RiExchangeLine className={pathname == "/exchange" ? "active text-3xl" : "text-gray-400 text-3xl"} />
-                        </Link>
-                        }
                     </div>
                     <div>
-                        {token ? 
-                        <Link href={emailVerified == 1 && status == 1 ? '/lever' : '/mail-verify'}>
+                        <Link href={token ? '/lever' : '/login'}>
                             <LuFileVolume2 className={pathname == "/lever" ? "active text-2xl" : "text-gray-400 text-2xl"} />
                         </Link>
-                        : 
-                        <Link href={'/login'}>
-                            <LuFileVolume2 className={pathname == "/lever" ? "active text-2xl" : "text-gray-400 text-2xl"} />
-                        </Link>
-                        }
                     </div>
                     <div>
-                        {token ? 
-                        <Link href={emailVerified == 1 && status == 1 ? '/assets' : '/mail-verify'}>
+                        <Link href={token ? '/assets' : '/login'}>
                             <PiWalletBold className={pathname == "/assets" ? "active text-3xl" : "text-gray-400 text-3xl"} />
                         </Link>
-                        : 
-                        <Link href={'/login'}>
-                            <PiWalletBold className={pathname == "/assets" ? "active text-3xl" : "text-gray-400 text-3xl"} />
-                        </Link>
-                        }
                     </div>
                 </div>
             </div>
