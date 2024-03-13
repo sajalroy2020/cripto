@@ -7,9 +7,11 @@ import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
 import { authenticatedTrue, authenticatedFalse, setUser } from '../../../features/AuthSlice';
 import { getProfileByToken } from '../../../servises/action/all';
+import { CgProfile } from "react-icons/cg";
 import { redirect, useRouter } from 'next/navigation';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { HiOutlineLogout } from "react-icons/hi";
 
 export default function Header(){
 
@@ -71,10 +73,14 @@ export default function Header(){
                         <Image className='md:hidden' src="/image/logo.png" width="100" height="100" alt='logo' />
                     </Link>
                     {authenticated ?
-                    <div>
-                        <button onClick={userLogOut} className="px-6 py-2 text-xs md:text-sm font-medium text-white border border-green-600 rounded-full hover:bg-green-800 focus:outline-none focus:shadow-outline" type="button" >
-                            Log Out
-                        </button>
+                    <div className="relative dropdown inline-block">
+                        <span className="mainDrropdownButton cursor-pointer">
+                            <Image className='rounded-full' src="/image/no-image.png" width="40" height="40" alt='logo' />
+                        </span>
+                        <div className="w-[160px] hidden drropdownMenu bg-gray-800 p-6 customeShadow top-12 absolute -left-32 rounded-md">
+                            <div className='flex items-center gap-3 pb-5 cursor-pointer'><CgProfile className='text-2xl' /> Profile</div>
+                            <div onClick={userLogOut} className='flex items-center gap-3 cursor-pointer'><HiOutlineLogout className='text-2xl' /> Log Out</div>
+                        </div>
                     </div>
                     :
                     <div>

@@ -1,7 +1,8 @@
 "use client";
 import { createChart, ColorType } from 'lightweight-charts';
 import React, { useEffect, useRef, useState } from 'react';
-import { getChart } from '../../../servises/action/all';
+import { getChart, getProfileByToken } from '../../../servises/action/all';
+import { useSelector } from 'react-redux';
 import Cookies from "js-cookie";
 import { useRouter } from 'next/navigation';
 
@@ -82,8 +83,9 @@ export const ChartComponent = props => {
 export default function Lever(props) {
 
 	const [chartData, setChartData] = useState([]);
-    const emailVerified = Cookies.get("email_verified");
-    const status = Cookies.get("status");
+
+	const authenticated = useSelector((state) => state.auth.authenticated);
+    const tokensiduser = Cookies.get("tokensiduser");
     const router = useRouter();
 
 	const getchartData = async () => {
@@ -95,13 +97,29 @@ export default function Lever(props) {
 		}
 	};
 
+	const getOtp = async (tokensiduser) => {
+		try {
+			const { data } = await getProfileByToken(tokensiduser);
+			if (data.email_verified == false) {
+				router.push('/mail-verify');
+			}
+		} catch (error) {
+			console.error(error, 'errorerrorerrorerror');
+		}
+	};
+
 	useEffect(() => {                          
 		getchartData();
+		if (tokensiduser) {
+			getOtp(tokensiduser);
+		}else{
+			router.push('/login')
+		}
 	}, []);
 
 	return (  
-		<> 
-		{emailVerified == 1 && status == 1 ?
+		<>
+		{authenticated ?
 			<div className='mx-auto px-0 container mt-4'>
 				<div className='border-4 border-gray-300'>
 				<ChartComponent {...props} data={chartData}></ChartComponent>
@@ -127,8 +145,9 @@ export default function Lever(props) {
 					</button>
 				</div>
 			</div>
-		: router.push('/mail-verify')}
+		:router.push('/login')}
 		</>
+		
 	);
 }
 

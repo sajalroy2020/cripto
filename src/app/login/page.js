@@ -33,6 +33,7 @@ export default function Login() {
 		try {
 			const { data } = await getLogin(fromData);
             Cookies.set("token", data.token);
+            Cookies.set("tokensiduser", data.user.uu_id);
             dispatch(authenticatedTrue(), setUser(data.user));
             showMessage('Login Successfully');
             router.push('/');

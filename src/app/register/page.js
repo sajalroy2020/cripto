@@ -33,13 +33,12 @@ export default function Register() {
 		try {
 			const { data } = await getRegister(fromData);
             Cookies.set("token", data.token);
-            console.log(data);
+            Cookies.set("tokensiduser", data.user.uu_id);
             dispatch(authenticatedTrue(), setUser(data.user));
             showMessage('Registration Successfully');
             router.push('/mail-verify');
 		} catch (error) {
             // error message set 
-            console.log(error);
             dispatch(authenticatedFalse());
             let email = error.response.data.message['email'];
             if (email) {
