@@ -29,3 +29,7 @@ export const deleteOtp = (data) => {
     return request.get(`/otp-delete/${data}`);
 };
 
+export const profileUpdate = (data) => {
+    return request.post("/profile-update", data);
+};
+
