@@ -46,6 +46,7 @@ export default function Header(){
 
   const userLogOut = () => {
     Cookies.remove("token");
+    Cookies.remove("tokensiduser");
     dispatch(authenticatedFalse());
     showMessage('Log Out Successfully');
     router.push('/');
@@ -78,7 +79,7 @@ export default function Header(){
                             <Image className='rounded-full' src="/image/no-image.png" width="40" height="40" alt='logo' />
                         </span>
                         <div className="w-[160px] hidden drropdownMenu bg-gray-800 p-6 customeShadow top-12 absolute -left-32 rounded-md">
-                            <div className='flex items-center gap-3 pb-5 cursor-pointer'><CgProfile className='text-2xl' /> Profile</div>
+                            <Link href={'/profile'}><div className='flex items-center gap-3 pb-5 cursor-pointer'><CgProfile className='text-2xl' /> Profile</div></Link>
                             <div onClick={userLogOut} className='flex items-center gap-3 cursor-pointer'><HiOutlineLogout className='text-2xl' /> Log Out</div>
                         </div>
                     </div>

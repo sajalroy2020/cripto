@@ -50,12 +50,19 @@ export default function Login() {
             if (password) {
                 setErrorPassword(password[0]);
             }
+            showErrorMessage(error.response.data.message);
 		}
 	};
 
 
     function showMessage(toastMsg) {
         toast.success(toastMsg, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+    }
+
+    function showErrorMessage(toastMsg) {
+        toast.error(toastMsg, {
           position: toast.POSITION.TOP_RIGHT,
         });
     }
@@ -82,6 +89,7 @@ export default function Login() {
                                         id="email"
                                         type="email"
                                         placeholder="Email"
+                                        required
                                     />
                                     {errorEmail && <p className="text-xs italic text-red-500">{errorEmail}</p>}
                                 </div>
@@ -94,7 +102,8 @@ export default function Login() {
                                             className="w-full px-3 py-2 mb-3 text-sm bg-gray-800 leading-tight text-gray-300 border border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                             id="password"
                                             type="password"
-                                            placeholder="******************"
+                                            placeholder="**********"
+                                            required
                                         />
                                         {errorPassword && <p className="text-xs italic text-red-500">{errorPassword}</p>}
                                     </div>
