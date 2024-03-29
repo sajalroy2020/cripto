@@ -4,6 +4,8 @@ import { getProfileByToken } from '../../../servises/action/all';
 import { useSelector } from 'react-redux';
 import Cookies from "js-cookie";
 import { useRouter } from 'next/navigation';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 
 export default function Assets() {
 
@@ -32,8 +34,26 @@ export default function Assets() {
 	return (
 		<>
         {authenticated ?
-            <div className='w-full px-10'>
-                
+            <div className='w-full px-10 pb-64'>
+				  <Tabs>
+					<TabList>
+						<Tab>Deposit</Tab>
+						<Tab>Withdrawal</Tab>
+						<Tab>Wallet</Tab>
+					</TabList>
+
+					<div className='pt-10'>
+						<TabPanel>
+							<h2>Deposit</h2>
+						</TabPanel>
+						<TabPanel>
+							<h2>Withdrawal</h2>
+						</TabPanel>
+						<TabPanel>
+							<h2>Wallet</h2>
+						</TabPanel>
+					</div>
+				</Tabs>
             </div>
 		:router.push('/login')}
 		</>

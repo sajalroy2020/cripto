@@ -117,14 +117,14 @@ export default function Login() {
                                     </button>
                                 </div>
                                 <hr className="mb-6 border-t" />
-                                <div className="text-center">
+                                {/* <div className="text-center">
                                     <Link
                                         className="inline-block text-sm text-green-600 align-baseline hover:text-green-800"
                                         href="#"
                                     >
                                         Forgot Password?
                                     </Link>
-                                </div>
+                                </div> */}
                                 <div className="text-center">
                                     <Link
                                         className="inline-block text-sm text-green-600 align-baseline hover:text-green-800"
