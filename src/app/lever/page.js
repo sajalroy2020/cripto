@@ -82,6 +82,7 @@ export const ChartComponent = props => {
 
 export default function Lever(props) {
 
+	// { time: '2019-05-24', open: 192.54, high: 193.86, low: 190.41, close: 193.59 },
 	const [chartData, setChartData] = useState([]);
 
 	const authenticated = useSelector((state) => state.auth.authenticated);
@@ -116,6 +117,9 @@ export default function Lever(props) {
 			router.push('/login')
 		}
 	}, []);
+
+
+	console.log(chartData, 'chartData');
 
 	return (  
 		<>

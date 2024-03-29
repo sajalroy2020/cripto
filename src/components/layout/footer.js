@@ -12,6 +12,8 @@ export default function Footer() {
     const pathname = usePathname();
     const token = Cookies.get("token");
 
+    console.log(pathname, 'pathname');
+
     return (
         <div className="sticky bottom-0 z-30 bg-black border-t border-gray-900">
             <div className='container mx-auto p-3'>
@@ -23,22 +25,22 @@ export default function Footer() {
                     </div>
                     <div>
                         <Link href={'/market'}>
-                            <RiExchangeFundsFill className={pathname == "/market" ? "active text-3xl" : "text-gray-400 text-3xl"} />
+                            <RiExchangeFundsFill className={pathname == "/market/" ? "active text-3xl" : "text-gray-400 text-3xl"} />
                         </Link>
                     </div>
                     <div>
                         <Link href={token ? '/exchange' : '/login'}>
-                            <RiExchangeLine className={pathname == "/exchange" ? "active text-3xl" : "text-gray-400 text-3xl"} />
+                            <RiExchangeLine className={pathname == "/exchange/" ? "active text-3xl" : "text-gray-400 text-3xl"} />
                         </Link>
                     </div>
                     <div>
                         <Link href={token ? '/lever' : '/login'}>
-                            <LuFileVolume2 className={pathname == "/lever" ? "active text-2xl" : "text-gray-400 text-2xl"} />
+                            <LuFileVolume2 className={pathname == "/lever/" ? "active text-2xl" : "text-gray-400 text-2xl"} />
                         </Link>
                     </div>
                     <div>
                         <Link href={token ? '/assets' : '/login'}>
-                            <PiWalletBold className={pathname == "/assets" ? "active text-3xl" : "text-gray-400 text-3xl"} />
+                            <PiWalletBold className={pathname == "/assets/" ? "active text-3xl" : "text-gray-400 text-3xl"} />
                         </Link>
                     </div>
                 </div>
