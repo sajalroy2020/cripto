@@ -58,3 +58,13 @@ body {
 .dropdown:hover .drropdownMenu{
     display: block;
 }
+
+.asset-tab .react-tabs__tab-list{
+  border: none;
+}
+.asset-tab .react-tabs__tab--selected{
+  background: #b1b0b0;
+}
+.asset-tab .react-tabs__tab {
+  padding: 6px 24px;
+}
